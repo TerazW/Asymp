@@ -13,6 +13,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import { mockMetrics, mockActions, mockAgents, mockIncidents, generateNewAction } from '@/lib/mock-data';
+import { SlackNotificationDark } from '@/components/SlackNotification';
 import type { Action } from '@/types';
 
 function MetricCard({
@@ -262,6 +263,7 @@ function OpenIncidents() {
 
 export default function Dashboard() {
   const [actions, setActions] = useState<Action[]>(mockActions);
+  const [showNotification, setShowNotification] = useState(true);
 
   // Simulate real-time updates
   useEffect(() => {
@@ -329,6 +331,28 @@ export default function Dashboard() {
           <ActiveAgents />
         </div>
       </div>
+
+      {/* Slack Notification Preview - Fixed position for demo */}
+      {showNotification && (
+        <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-right-5 duration-300">
+          <div className="relative">
+            <button
+              onClick={() => setShowNotification(false)}
+              className="absolute -top-2 -right-2 w-6 h-6 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center text-gray-400 hover:text-white text-sm z-10"
+            >
+              x
+            </button>
+            <SlackNotificationDark
+              agentName="DeployBot"
+              action="Deploy v2.4.1 to staging"
+              target="staging-cluster/payments-service"
+              confidence={85}
+              owner="Sarah Chen"
+              timestamp="Just now"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

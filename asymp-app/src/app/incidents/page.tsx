@@ -136,6 +136,17 @@ function IncidentCard({ incident }: { incident: Incident }) {
             </span>
           </div>
           <h3 className="text-lg font-medium text-white">{incident.title}</h3>
+
+          {/* One-line Blast Radius */}
+          <div className="flex items-center gap-2 mt-2">
+            <span className="text-xs text-gray-500">Impact:</span>
+            <span className="text-xs text-white">{incident.affectedServices.length} services</span>
+            <span className="text-xs text-gray-600">·</span>
+            <span className="text-xs text-white">{incident.responders.length} teams</span>
+            <span className="text-xs text-gray-600">·</span>
+            <span className="text-xs text-yellow-400">customer-facing</span>
+          </div>
+
           <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
             <span>Started {formatDuration(incident.startTime)} ago</span>
             {incident.endTime && <span>Duration: {formatDuration(incident.startTime, incident.endTime)}</span>}
@@ -180,14 +191,18 @@ function IncidentCard({ incident }: { incident: Incident }) {
 
             {/* Right: Details */}
             <div className="p-4">
-              {/* Root Cause */}
+              {/* Root Cause with Confidence */}
               {incident.rootCause && (
                 <div className="mb-6">
                   <h4 className="text-sm font-medium text-gray-300 mb-2">Root Cause</h4>
                   <div className="p-3 rounded-lg bg-[#0d0d14] border border-[#1a1a2e]">
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 mb-2">
                       <Bot className="w-4 h-4 text-primary-400" />
                       <span className="text-sm font-medium text-white">{incident.rootCause.agentName}</span>
+                      {/* Confidence Badge */}
+                      <span className="px-2 py-0.5 text-xs font-semibold text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 rounded">
+                        LIKELY — 85%
+                      </span>
                     </div>
                     <p className="text-sm text-gray-400">{incident.rootCause.description}</p>
                   </div>
