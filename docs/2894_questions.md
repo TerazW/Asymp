@@ -26,7 +26,7 @@ Who do you route to? People? Bots? Approval systems? Rollback systems?
 
 7.	"pre-action routing not pre-action approval"是什么意思？举一个具体 action。
 What does "pre-action routing not pre-action approval" mean? Give a specific action example.
-**答案/Answer**: 例如agent要执行`kubectl delete pod`，我们不阻塞它等人批准，而是打上`monitored_executed`标签、通知相关owner、记录以便事后快速定位。/ E.g., when agent executes `kubectl delete pod`, we don't block for approval—we tag it `monitored_executed`, notify affected owners, and record for fast post-hoc localization.
+**答案/Answer**: 例如agent要执行`kubectl delete pod`，我们不阻塞它等人批准，而是打上`monitored_execute`标签、通知相关owner、记录以便事后快速定位。/ E.g., when agent executes `kubectl delete pod`, we don't block for approval—we tag it `monitored_execute`, notify affected owners, and record for fast post-hoc localization.
 
 8.	你的系统输出的"最小单位"是什么？事件、行动、任务、run、trace、incident？
 What is the minimum unit your system outputs? Event, action, task, run, trace, or incident?
@@ -5339,7 +5339,7 @@ How do you guarantee you won't become deployment bottleneck?
 
 1330.	你如何保证你不会变成审批系统？
 How do you guarantee you won't become approval system?
-**答案/Answer**: Core philosophy：不做pre-action approval。Design doc明确说这个。Default policy是monitored_executed不是require_approval。我们的whole value prop是"don't block agents."变成approval system = betray our design philosophy。/ Core philosophy: don't do pre-action approval. Design doc explicitly states this. Default policy is monitored_executed not require_approval. Our whole value prop is "don't block agents." Becoming approval system = betray our design philosophy.
+**答案/Answer**: Core philosophy：不做pre-action approval。Design doc明确说这个。Default policy是monitored_execute不是require_approval。我们的whole value prop是"don't block agents."变成approval system = betray our design philosophy。/ Core philosophy: don't do pre-action approval. Design doc explicitly states this. Default policy is monitored_execute not require_approval. Our whole value prop is "don't block agents." Becoming approval system = betray our design philosophy.
 
 1331.	你如何保证你不会变成新的流程官僚？
 How do you guarantee you won't become new process bureaucracy?
@@ -7149,7 +7149,7 @@ Do you think incidents are technical or organizational problems? What ratio?
 
 1784.	你是否相信"错误一定会发生"？如果是，你的设计如何体现？
 Do you believe "errors will inevitably happen"? If so, how does your design reflect this?
-**答案/Answer**: 绝对相信。设计体现：默认monitored_executed而非blocked。Recovery paths for every action type。Learning loop to prevent recurrence。/ Absolutely believe. Design reflects: default monitored_executed not blocked. Recovery paths for every action type. Learning loop to prevent recurrence.
+**答案/Answer**: 绝对相信。设计体现：默认monitored_execute而非blocked。Recovery paths for every action type。Learning loop to prevent recurrence。/ Absolutely believe. Design reflects: default monitored_execute not blocked. Recovery paths for every action type. Learning loop to prevent recurrence.
 
 1785.	你如何看待"问责文化"与"学习文化"的冲突？
 How do you view the conflict between "accountability culture" and "learning culture"?
